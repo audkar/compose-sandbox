@@ -31,7 +31,7 @@ compose.desktop {
         mainClass = "MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.AppImage)
-            packageName = "jvm"
+            packageName = "compose-sandbox"
         }
     }
 }
