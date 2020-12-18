@@ -52,10 +52,19 @@ kotlin {
 }
 
 android {
-  compileSdkVersion(29)
+  compileSdkVersion(30)
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
   defaultConfig {
     minSdkVersion(24)
-    targetSdkVersion(29)
+    targetSdkVersion(30)
   }
+  compileOptions {
+    coreLibraryDesugaringEnabled = true
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+  }
+}
+
+dependencies {
+  coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.1")
 }
