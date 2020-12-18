@@ -17,18 +17,22 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
+import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.darkColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.primarySurface
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
@@ -47,11 +52,14 @@ data class Message(
   val createTime: Instant,
 )
 
+@ExperimentalMaterialApi
 @Composable
 fun App() {
+  val scope = rememberCoroutineScope()
   var messages by remember { mutableStateOf(listOf<Message>()) }
   var currentMessage by remember { mutableStateOf(TextFieldValue()) }
   val listState = rememberLazyListState()
+  val scaffoldState = rememberScaffoldState()
 
   fun sendMessage() {
     if (currentMessage.text.isNotBlank()) {
@@ -71,7 +79,10 @@ fun App() {
   MaterialTheme(
     colors = darkColors(),
   ) {
-    Surface(color = MaterialTheme.colors.background) {
+    Scaffold(
+      topBar = { TopAppBar(title = { Text("Title") }) },
+      scaffoldState = scaffoldState,
+    ) {
       Column(
         modifier = Modifier.fillMaxSize(),
       ) {
@@ -109,6 +120,15 @@ fun App() {
             },
           )
           Spacer(Modifier.width(8.dp))
+          Button(
+            onClick = {
+              scope.launch {
+                scaffoldState.snackbarHostState.showSnackbar("Hi", null, SnackbarDuration.Short)
+              }
+            },
+          ) {
+            Text("Show")
+          }
           Button(
             onClick = ::sendMessage,
           ) {
