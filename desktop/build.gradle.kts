@@ -29,6 +29,7 @@ kotlin {
 compose.desktop {
   application {
     mainClass = "MainKt"
+    jvmArgs.add("-Dsun.java2d.uiScale=2")
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.AppImage)
       packageName = "compose-sandbox"
