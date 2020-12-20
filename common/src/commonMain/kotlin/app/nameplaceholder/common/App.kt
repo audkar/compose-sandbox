@@ -24,6 +24,7 @@ import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -65,12 +66,16 @@ fun App() {
     if (currentMessage.text.isNotBlank()) {
       messages = messages + Message(
         userName = "User1",
-        message = currentMessage.text,
+        message = currentMessage.text.trim(),
         createTime = Clock.System.now(),
       )
       currentMessage = TextFieldValue()
       scope.launch {
         listState.snapToItemIndex(messages.size)
+      }
+    } else {
+      scope.launch {
+        showErrorMessage(scaffoldState, "Message is empty")
       }
     }
   }
@@ -124,15 +129,6 @@ fun App() {
           )
           Spacer(Modifier.width(8.dp))
           Button(
-            onClick = {
-              scope.launch {
-                scaffoldState.snackbarHostState.showSnackbar("Hi", null, SnackbarDuration.Short)
-              }
-            },
-          ) {
-            Text("Show")
-          }
-          Button(
             onClick = ::sendMessage,
           ) {
             Text("Send")
@@ -141,6 +137,14 @@ fun App() {
       }
     }
   }
+}
+
+@ExperimentalMaterialApi
+private suspend fun showErrorMessage(
+  scaffoldState: ScaffoldState,
+  message: String,
+) {
+  scaffoldState.snackbarHostState.showSnackbar(message, null, SnackbarDuration.Short)
 }
 
 @Composable
