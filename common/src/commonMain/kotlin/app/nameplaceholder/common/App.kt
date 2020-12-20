@@ -69,6 +69,9 @@ fun App() {
         createTime = Clock.System.now(),
       )
       currentMessage = TextFieldValue()
+      scope.launch {
+        listState.snapToItemIndex(messages.size)
+      }
     }
   }
 
