@@ -1,9 +1,8 @@
 import org.jetbrains.compose.compose
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
   kotlin("multiplatform")
-  id("org.jetbrains.compose") version "0.3.0-build135"
+  id("org.jetbrains.compose") version "0.3.0-build150"
 }
 
 group = "app.nameplaceholder"
@@ -31,7 +30,6 @@ compose.desktop {
     mainClass = "MainKt"
     jvmArgs.add("-Dsun.java2d.uiScale=2")
     nativeDistributions {
-      targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.AppImage)
       packageName = "compose-sandbox"
     }
   }

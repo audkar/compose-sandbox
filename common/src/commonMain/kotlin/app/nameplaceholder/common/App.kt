@@ -12,12 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.ListItem
@@ -53,7 +53,6 @@ data class Message(
   val createTime: Instant,
 )
 
-@ExperimentalMaterialApi
 @Composable
 fun App() {
   val scope = rememberCoroutineScope()
@@ -139,7 +138,6 @@ fun App() {
   }
 }
 
-@ExperimentalMaterialApi
 private suspend fun showErrorMessage(
   scaffoldState: ScaffoldState,
   message: String,
@@ -160,6 +158,7 @@ private fun MessageListItem(
         icon = {
           Icon(
             imageVector = Icons.Default.Person,
+            contentDescription = null,
             modifier = Modifier
               .background(
                 MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
@@ -172,7 +171,7 @@ private fun MessageListItem(
           IconButton(onClick = {
             onDeleteClick(message)
           }, content = {
-            Icon(Icons.Default.Delete)
+            Icon(Icons.Default.Delete, null)
           })
         },
       ) {

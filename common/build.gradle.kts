@@ -2,7 +2,7 @@ import org.jetbrains.compose.compose
 
 plugins {
   kotlin("multiplatform")
-  id("org.jetbrains.compose") version "0.3.0-build135"
+  id("org.jetbrains.compose") version "0.3.0-build150"
   id("com.android.library")
   id("kotlin-android-extensions")
 }
@@ -48,6 +48,10 @@ kotlin {
     }
     val desktopMain by getting
     val desktopTest by getting
+
+    all {
+      languageSettings.useExperimentalAnnotation("androidx.compose.material.ExperimentalMaterialApi")
+    }
   }
 }
 
@@ -59,7 +63,7 @@ android {
     targetSdkVersion(30)
   }
   compileOptions {
-    coreLibraryDesugaringEnabled = true
+    isCoreLibraryDesugaringEnabled = true
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
   }

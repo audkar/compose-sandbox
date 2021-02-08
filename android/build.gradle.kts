@@ -1,5 +1,5 @@
 plugins {
-  id("org.jetbrains.compose") version "0.3.0-build135"
+  id("org.jetbrains.compose") version "0.3.0-build150"
   id("com.android.application")
   kotlin("android")
 }
@@ -35,7 +35,7 @@ android {
     }
   }
   compileOptions {
-    coreLibraryDesugaringEnabled = true
+    isCoreLibraryDesugaringEnabled = true
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
   }

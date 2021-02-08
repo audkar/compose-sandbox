@@ -1,15 +1,12 @@
-import androidx.compose.desktop.AppWindowAmbient
+import androidx.compose.desktop.LocalAppWindow
 import androidx.compose.desktop.Window
-import androidx.compose.runtime.*
 import app.nameplaceholder.common.App
 import java.awt.Dimension
 
 fun main() = Window {
-  val appWindow = AppWindowAmbient.current!!
+  val appWindow = LocalAppWindow.current
+
+  appWindow.window.minimumSize = Dimension(500, 400)
 
   App()
-
-  onActive {
-    appWindow.window.minimumSize = Dimension(500, 400)
-  }
 }

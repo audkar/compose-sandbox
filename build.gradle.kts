@@ -9,8 +9,8 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
-    classpath("com.android.tools.build:gradle:4.0.1")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30")
+    classpath("com.android.tools.build:gradle:4.1.2")
   }
 }
 
@@ -57,6 +57,6 @@ tasks.named<DependencyUpdatesTask>("dependencyUpdates") {
 }
 
 tasks.wrapper {
-  gradleVersion = "6.7.1"
+  gradleVersion = "6.8.2"
   distributionType = Wrapper.DistributionType.ALL
 }
