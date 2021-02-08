@@ -54,12 +54,13 @@ data class Message(
 )
 
 @Composable
-fun App() {
+fun App(viewModelFactory: SampleViewModelFactory) {
   val scope = rememberCoroutineScope()
   var messages by remember { mutableStateOf(listOf<Message>()) }
   var currentMessage by remember { mutableStateOf(TextFieldValue()) }
   val listState = rememberLazyListState()
   val scaffoldState = rememberScaffoldState()
+  val viewModel = vModel(null) { viewModelFactory() }
 
   fun sendMessage() {
     if (currentMessage.text.isNotBlank()) {

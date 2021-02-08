@@ -32,6 +32,7 @@ kotlin {
         api(compose.foundation)
         api(compose.material)
         implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
+        api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2-native-mt")
       }
     }
     val commonTest by getting
